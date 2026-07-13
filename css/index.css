@@ -52,6 +52,7 @@ h1{
     font-size: 42px;
     max-width: 540px;
     line-height: 46px;
+    font-weight: 700;
 }
 
 .descr{
@@ -62,6 +63,10 @@ h1{
 
 .descr span{
     color: var(--orange-light);
+}
+
+.decoration-wrapper{
+    position: relative;
 }
 
 @media(max-width: 1000px){

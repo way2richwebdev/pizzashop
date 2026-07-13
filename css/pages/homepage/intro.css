@@ -4,7 +4,7 @@
 }
 
 .intro{
-    overflow-x: hidden;
+    overflow: hidden;
     padding-bottom: 80px;
 }
 
@@ -14,7 +14,7 @@
 
 .intro__link{
     width: 200px;
-    margin-top: 16px;
+    margin-top: 25px;
 }
 
 .intro-content{
@@ -55,20 +55,14 @@
     transform: translateX(3px);
 }
 
-.intro__image-wrapper{
-    position: relative;
-}
-
-.intro__image__decoration{
+.intro-content .decoration-wrapper .decoration-first{
     position: absolute;
-}
-
-.decoration-first{
     bottom: -100px;
     left: -120px;
 }
 
-.decoration-second{
+.intro-content .decoration-wrapper .decoration-second{
+    position: absolute;
     top: -125px;
     right: -130px;
 }
@@ -92,18 +86,22 @@
         margin-top: 50px;
     }
 
-    .decoration-first{
+    .intro-content .decoration-wrapper .decoration-first{
         bottom: -40px;
         left: -60px;
         width: 110px;
         height: 117px;
     }
 
-    .decoration-second{
+    .intro-content .decoration-wrapper .decoration-second{
         width: 129px;
         height: 129px;
         top: -60px;
         right: -60px;
+    }
+
+    .intro{
+        padding-bottom: 0;
     }
 }
 
