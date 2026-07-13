@@ -1,0 +1,80 @@
+@import './vendors/container.css';
+@import './vendors/fonts.css';
+@import './vendors/normalize.css';
+@import './vendors/vars.css';
+
+@import './components/header.css';
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat';
+}
+
+body{
+    background: var(--brown);
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style-type: none;
+}
+
+h1{ 
+    padding: 0;
+    margin: 0;
+}
+
+.button{
+    background: var(--orange-light);
+    transition: 0.4s;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: var(--white);
+    border-radius: 70px;
+    height: 40px;
+}
+
+.button:hover{
+    background: var(--orange-dark);
+}
+
+.title{
+    color: var(--white);
+    font-size: 42px;
+    max-width: 540px;
+    line-height: 46px;
+}
+
+.descr{
+    color: var(--gray);
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.descr span{
+    color: var(--orange-light);
+}
+
+@media(max-width: 1000px){
+    .title{
+        color: var(--white);
+        font-size: 32px;
+        max-width: 480px;
+        line-height: 38px;
+    }
+
+    .descr{
+        color: var(--gray);
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
