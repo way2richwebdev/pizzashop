@@ -33,7 +33,6 @@ h1{
     background: var(--orange-light);
     transition: 0.4s;
     border: none;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,6 +40,7 @@ h1{
     color: var(--white);
     border-radius: 70px;
     height: 40px;
+    cursor: pointer;
 }
 
 .button:hover{
