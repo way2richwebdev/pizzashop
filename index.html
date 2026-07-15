@@ -149,27 +149,15 @@
         <div class="container">
             <div class="menu-content">
                 <div class="menu__title title">Меню</div>
-                <ul class="menu-list">
-                    <li class="menu-list__item">
-                        <img loading="lazy" src="./assets/img/menu1.png" alt="Итальянская" width="160" height="157" class="menu-list__item__preview">
-                        <h2 class="menu-list__item__label">Итальянская</h2>
-                        <p class="menu-list__item__descr">Лук, картофель, помидоры, грибы, сыр, оливки, мясо...</p>
-                        <div class="menu-list__item-sizes">
-                            <div class="menu-list__item-sizes__item">22</div>
-                            <div class="menu-list__item-sizes__item active">28</div>
-                            <div class="menu-list__item-sizes__item">33</div>
-                        </div>
-                        <div class="menu-list__item-actions-wrapper">
-                            <div class="menu-list__item__price">350 ₽</div>
-                            <div class="menu-list__item-actions">
-                                <div class="menu-list__item-actions__item decrement">-</div>
-                                <div class="menu-list__item-actions__item__value">1</div>
-                                <div class="menu-list__item-actions__item increment">+</div>
-                            </div>
-                        </div>
-                        <button class="menu-list__item__button button">В корзину</button>
-                    </li>
-                </ul>
+                <ul class="menu-list first-part" itemscope itemtype="http://schema.org/ItemList"></ul>
+                <a href="#" class="menu__banner">
+                    <picture class="menu__banner__preview">
+                        <source srcset="./assets/img/banner2.png" media="(max-width: 768px)" />
+                        <img loading="lazy" src="./assets/img/banner.png" width="1250" height="286" alt="Самая популярная пицца"  />
+                    </picture>
+                    Самая популярная пицца
+                </a>
+                <ul class="menu-list second-part" itemscope itemtype="http://schema.org/ItemList"></ul>
             </div>
         </div>
     </div>

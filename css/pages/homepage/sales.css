@@ -76,9 +76,26 @@
         margin-left: 0;
         margin: 0 auto;
         margin-top: 20px;
+        border-radius: 30px;
     }
 
     .sales-list__item{
         margin: 0;
+    }
+}
+
+@media(max-width: 540px){
+    .sales-list.responsive{
+        width: 340px;
+        height: 230px;
+    }
+
+    .sales-list__item__label{
+        font-size: 20px;
+    }
+
+    .sales-list__item__link{
+        margin-top: 20px;
+        width: 160px;
     }
 }
