@@ -78,6 +78,10 @@ h1{
     position: relative;
 }
 
+.decoration-wrapper .decoration-first, .decoration-second{
+    position: absolute;
+}
+
 @media(max-width: 1000px){
     .title{
         color: var(--white);

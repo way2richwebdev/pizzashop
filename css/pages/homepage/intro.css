@@ -55,13 +55,11 @@
 }
 
 .intro-content .decoration-wrapper .decoration-first{
-    position: absolute;
     bottom: -100px;
     left: -120px;
 }
 
 .intro-content .decoration-wrapper .decoration-second{
-    position: absolute;
     top: -125px;
     right: -130px;
 }
