@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
-    const swiper = new Swiper('.swiper', {
+    new Swiper('.sales-list.responsive', {
     direction: 'horizontal',
     slidesPerView: 1,
     spaceBetween: 0,

@@ -93,48 +93,48 @@
             </div>
         </div>
     </div>
-    <div class="sales section">
+    <div class="sales section" id="sales">
         <div class="container">
             <div class="sales-content">
                 <div class="sales__title title">Акции</div>
                 <p class="sales__descr descr">В нашей пиццерии регулярно проводятся мероприятия, благодаря которым вы сможете насладиться вкусной едой по <span>более низкой цене!</span></p>
                 <ul class="sales-list">
-                    <li class="sales-list__item">
-                        <div class="sales-list__item__label">Бесплатный кофе за 3 пиццы</div>
-                        <img loading="lazy" src="./assets/img/sale1.png" alt="Бесплатный кофе за 3 пиццы" width="400" height="260" class="sales-list__item__preview">
+                    <li class="sales-list__item" itemscope itemtype="http://schema.org/Event" >
+                        <div itemprop="name" class="sales-list__item__label">Бесплатный кофе за 3 пиццы</div>
+                        <img itemprop="image" loading="lazy" src="./assets/img/sale1.png" alt="Бесплатный кофе за 3 пиццы" width="400" height="260" class="sales-list__item__preview">
                         <a href="#" class="sales-list__item__link button">Подробнее</a>
                     </li>
-                    <li class="sales-list__item">
-                        <div class="sales-list__item__label">2 пиццы по цене 1</div>
-                        <img loading="lazy" src="./assets/img/sale2.png" alt="2 пиццы по цене 1" width="400" height="260" class="sales-list__item__preview">
+                    <li class="sales-list__item" itemscope itemtype="http://schema.org/Event" >
+                        <div itemprop="name" class="sales-list__item__label">2 пиццы по цене 1</div>
+                        <img itemprop="image" loading="lazy" src="./assets/img/sale2.png" alt="2 пиццы по цене 1" width="400" height="260" class="sales-list__item__preview">
                         <a href="#" class="sales-list__item__link button">Подробнее</a>
                     </li>
-                    <li class="sales-list__item">
-                        <div class="sales-list__item__label">Пицца за установку приложения</div>
-                        <img loading="lazy" src="./assets/img/sale3.png" alt="Пицца за установку приложения" width="400" height="260" class="sales-list__item__preview">
+                    <li class="sales-list__item" itemscope itemtype="http://schema.org/Event" >
+                        <div itemprop="name" class="sales-list__item__label">Пицца за установку приложения</div>
+                        <img itemprop="image" loading="lazy" src="./assets/img/sale3.png" alt="Пицца за установку приложения" width="400" height="260" class="sales-list__item__preview">
                         <a href="#" class="sales-list__item__link button">Подробнее</a>
                     </li>
                 </ul>
                 <div class="swiper sales-list responsive">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <li class="sales-list__item">
-                                <div class="sales-list__item__label">Бесплатный кофе за 3 пиццы</div>
-                                <img loading="lazy" src="./assets/img/sale1.png" alt="Бесплатный кофе за 3 пиццы" width="400" height="260" class="sales-list__item__preview">
+                            <li class="sales-list__item" itemscope itemtype="http://schema.org/Event">
+                                <div itemprop="name" class="sales-list__item__label">Бесплатный кофе за 3 пиццы</div>
+                                <img itemprop="image" loading="lazy" src="./assets/img/sale1.png" alt="Бесплатный кофе за 3 пиццы" width="400" height="260" class="sales-list__item__preview">
                                 <a href="#" class="sales-list__item__link button">Подробнее</a>
                             </li>
                         </div>
                         <div class="swiper-slide">
-                            <li class="sales-list__item">
-                                <div class="sales-list__item__label">2 пиццы по цене 1</div>
-                                <img loading="lazy" src="./assets/img/sale2.png" alt="2 пиццы по цене 1" width="400" height="260" class="sales-list__item__preview">
+                            <li class="sales-list__item" itemscope itemtype="http://schema.org/Event">
+                                <div itemprop="name" class="sales-list__item__label">2 пиццы по цене 1</div>
+                                <img itemprop="image" loading="lazy" src="./assets/img/sale2.png" alt="2 пиццы по цене 1" width="400" height="260" class="sales-list__item__preview">
                                 <a href="#" class="sales-list__item__link button">Подробнее</a>
                             </li>
                         </div>
                         <div class="swiper-slide">
-                            <li class="sales-list__item">
-                                <div class="sales-list__item__label">Пицца за установку приложения</div>
-                                <img loading="lazy" src="./assets/img/sale3.png" alt="Пицца за установку приложения" width="400" height="260" class="sales-list__item__preview">
+                            <li class="sales-list__item" itemscope itemtype="http://schema.org/Event">
+                                <div itemprop="name" class="sales-list__item__label">Пицца за установку приложения</div>
+                                <img itemprop="image" loading="lazy" src="./assets/img/sale3.png" alt="Пицца за установку приложения" width="400" height="260" class="sales-list__item__preview">
                                 <a href="#" class="sales-list__item__link button">Подробнее</a>
                             </li>
                         </div>
@@ -142,6 +142,34 @@
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu section" id="menu">
+        <div class="container">
+            <div class="menu-content">
+                <div class="menu__title title">Меню</div>
+                <ul class="menu-list">
+                    <li class="menu-list__item">
+                        <img loading="lazy" src="./assets/img/menu1.png" alt="Итальянская" width="160" height="157" class="menu-list__item__preview">
+                        <h2 class="menu-list__item__label">Итальянская</h2>
+                        <p class="menu-list__item__descr">Лук, картофель, помидоры, грибы, сыр, оливки, мясо...</p>
+                        <div class="menu-list__item-sizes">
+                            <div class="menu-list__item-sizes__item">22</div>
+                            <div class="menu-list__item-sizes__item active">28</div>
+                            <div class="menu-list__item-sizes__item">33</div>
+                        </div>
+                        <div class="menu-list__item-actions-wrapper">
+                            <div class="menu-list__item__price">350 ₽</div>
+                            <div class="menu-list__item-actions">
+                                <div class="menu-list__item-actions__item decrement">-</div>
+                                <div class="menu-list__item-actions__item__value">1</div>
+                                <div class="menu-list__item-actions__item increment">+</div>
+                            </div>
+                        </div>
+                        <button class="menu-list__item__button button">В корзину</button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

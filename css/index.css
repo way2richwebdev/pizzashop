@@ -12,8 +12,12 @@
     font-family: 'Montserrat';
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
-    background: var(--brown);
+    background: linear-gradient(45deg, #1E0C00 0%, #1F0700 31%, #170A00 69%, #1E0D00 100%);
 }
 
 a{
@@ -56,7 +60,7 @@ h1{
 }
 
 .section{
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .descr{
@@ -89,6 +93,6 @@ h1{
     }
 
     .section{
-        margin-top: 15px;
+        margin-top: 30px;
     }
 }
