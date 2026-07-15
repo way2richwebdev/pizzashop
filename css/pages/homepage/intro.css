@@ -81,6 +81,7 @@
 
     .intro-content-main{
         margin-top: 50px;
+        max-width: 360px;
     }
 
     .intro-content .decoration-wrapper .decoration-first{

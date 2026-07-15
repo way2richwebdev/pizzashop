@@ -1,3 +1,7 @@
+.about{
+    padding-bottom: 130px;
+}
+
 .about__descr{
     max-width: 550px;
 }
@@ -54,6 +58,10 @@
     
     .about-content-main{
         margin-top: 30px;
+    }
+    
+    .about{
+        padding-bottom: 60px;
     }
 }
 

@@ -4,6 +4,7 @@
 @import './vendors/vars.css';
 
 @import './components/header.css';
+@import './components/footer.css';
 
 *{
     box-sizing: border-box;
