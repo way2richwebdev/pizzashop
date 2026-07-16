@@ -27,3 +27,14 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media(max-width: 540px){
+    .footer-contacts__item{
+        font-size: 14px;
+    }
+
+    .footer__logo img{
+        width: 130px;
+        height: 27;
+    }
+}
