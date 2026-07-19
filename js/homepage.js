@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const content = filteredContent.map((item) => {
             return `
-            <li class="menu-list__item" data-id="${item.id}" itemscope itemprop="itemListElement" itemtype="http://schema.org/Product">
+            <li class="menu-list__item" data-id="${item.id}" data-price="${item.sizes.find((item) => item.isActive).price * item.quantity}" itemscope itemprop="itemListElement" itemtype="http://schema.org/Product">
                 <img itemprop="image" loading="lazy" src="${item.preview}" alt="${item.label}" width="160" height="157" class="menu-list__item__preview">
                 <h2 itemprop="name" class="menu-list__item__label">${item.label}</h2>
                 <meta itemprop="description" content="${item.description}">
@@ -83,7 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 </div>
                 <div class="menu-list__item-actions-wrapper" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
-                    <div class="menu-list__item__price" itemprop="price">${item.sizes.find((item) => item.isActive).price} ₽</div>
+                    <div class="menu-list__item__price" itemprop="price">${item.sizes.find((item) => item.isActive).price * item.quantity} ₽</div>
                     <meta itemprop="priceCurrency" content="RUB">
                     <meta itemprop="availability" content="http://schema.org/InStock" />
                     <div class="menu-list__item-actions">
@@ -103,6 +103,18 @@ window.addEventListener('DOMContentLoaded', () => {
     generateMenuList(firstPart, menuListFirst, filterValue);
     generateMenuList(secondPart, menuListSecond, filterValue);
 
+    const updateMenuLists = (id) => {
+        if(firstPart.find((item) => item.id === id)){
+            generateMenuList(firstPart, menuListFirst, filterValue);
+            return console.log('first')
+        }
+
+        if(secondPart.find((item) => item.id === id)){
+            generateMenuList(secondPart, menuListSecond, filterValue); 
+            return console.log('sec')
+        }
+    }
+
     const pickSize = (target) => {
         const parent = target.closest('.menu-list__item');
 
@@ -111,50 +123,66 @@ window.addEventListener('DOMContentLoaded', () => {
         target.classList.add('active');
 
         const menuItemId = +parent.dataset.id;
+        const menuItem = menu.find((item) => item.id === menuItemId);
 
         const sizeValue = +target.innerHTML;
         
-        const priceNode = parent.querySelector('.menu-list__item__price');
-
-        const menuItem = menu.find((item) => item.id === menuItemId);
-        
         menuItem.sizes.find((item) => item.isActive === true).isActive = false;
         menuItem.sizes.find((item) => item.size === sizeValue).isActive = true;
-    
-        if(firstPart.find((item) => item.id === menuItemId)){
-            generateMenuList(firstPart, menuListFirst, filterValue);
-            return console.log('first')
-        }
-
-        if(secondPart.find((item) => item.id === menuItemId)){
-            generateMenuList(secondPart, menuListSecond, filterValue); 
-            return console.log('sec')
-        }
+        
+        updateMenuLists(menuItemId);
     };  
 
-    // const changeQuantity = (target, value) => {
-    //     const parent = target.closest('.menu-list__item');
-    //     const quantityNode = parent.querySelector('.menu-list__item-actions__item__value');
-    //     const priceNode = parent.querySelector('.menu-list__item__price');
+    const changeQuantity = (target, value) => {
+        const parent = target.closest('.menu-list__item');
+        const quantityNode = parent.querySelector('.menu-list__item-actions__item__value');
+        const priceNode = parent.querySelector('.menu-list__item__price');
 
-    //     let quantity = +quantityNode.innerHTML;
+        const menuItemId = +parent.dataset.id;
+        const menuItem = menu.find((item) => item.id === menuItemId);
 
-    //     if(value === -1 && quantity === 1){
-    //         return
-    //     }
+        let quantity = menuItem.quantity;
 
-    //     quantity = quantity + value;
+        if(value === -1 && quantity === 1){
+            return
+        }
 
-    //     quantityNode.innerHTML = quantity;
+        quantity = quantity + value;
 
-    //     const sizeValue = +parent.querySelector('.menu-list__item-sizes__item.active').innerHTML;
+        menu.find((item) => item.id === menuItemId).quantity = quantity;
 
-    //     const menuItem = menu.filter((item) => item.id === +parent.dataset.id);
+        updateMenuLists(menuItemId);
+    };
 
-    //     const currentPrice = menuItem[0].sizes.filter((item) => item.size === sizeValue)[0].price;
+    const addToCart = (target) => {
+        const parent = target.closest('.menu-list__item');
 
-    //     priceNode.innerHTML = currentPrice * quantity + ' ₽';
-    // };
+        const timeout = setTimeout(() => {
+            target.innerHTML = 'В корзину';
+            target.removeAttribute('disabled');
+            parent.classList.remove('active')
+        }, 800);
+
+        target.innerHTML = 'Добавлено';
+        target.setAttribute('disabled', true);
+        parent.classList.add('active')
+
+        const id = +parent.dataset.id;
+
+        const menuItem = menu.find((item) => item.id === id);
+
+        const activeSize = menuItem.sizes.find((item) => item.isActive);
+
+        const order = {
+            id: menuItem.id,
+            name: menuItem.label,
+            size: activeSize.size,
+            quantity: menuItem.quantity,
+            price: activeSize.price * menuItem.quantity
+        };
+
+        console.log(order);
+    };
 
     window.addEventListener('click', ({target}) => {
         if(target.className === 'menu-filter__item'){
@@ -174,6 +202,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (target.className === 'menu-list__item-actions__item decrement'){
             changeQuantity(target, -1);
+        };
+
+        if (target.className === 'menu-list__item__button button'){
+            addToCart(target);
         };
     });
 });

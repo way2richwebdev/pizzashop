@@ -12,11 +12,16 @@
     color: var(--white);
 }
 
+.menu-list__item.active .menu-list__item__preview{
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
 .menu-list__item__preview{
     position: absolute;
     top: 0%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: 0.4s;
 }
 
 .menu-list__item__label{
