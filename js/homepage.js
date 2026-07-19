@@ -11,21 +11,26 @@ window.addEventListener('DOMContentLoaded', () => {
         },
     });
 
+    let filterValue = null;
+
     const filterItems = document.querySelectorAll('.menu-filter__item');
 
     const filterItemClickHandler = (target) => {
         document.querySelector('.menu-filter__item.active').classList.remove('active');
 
         target.classList.add('active');
+
+        filterValue = target.dataset.filterValue;
+        console.log(filterValue)
     };
 
     const menu = [
-        {id: 1, preview: './assets/img/menu1.png', categories: ['Мясная', 'Грибы'], label: 'Итальянская', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', sizes: [{size: 22, price: 350}, {size: 28, price: 380}, {size: 33, price: 400}]},
-        {id: 2, preview: './assets/img/menu2.png', categories: ['Морепродукты'], label: 'Венеция', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', sizes: [{size: 22, price: 300}, {size: 28, price: 410}]},
-        {id: 3, preview: './assets/img/menu3.png', categories: ['Мясная'], label: 'Мясная', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', sizes: [{size: 22, price: 380}, {size: 28, price: 400}, {size: 33, price: 420}]},
-        {id: 4, preview: './assets/img/menu4.png', categories: ['Вегетарианская'], label: 'Сырная', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', sizes: [{size: 33, price: 500}]},
+        {id: 1, preview: './assets/img/menu1.png', categories: ['Мясная', 'Грибы'], label: 'Итальянская', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', quantity: 1, sizes: [{size: 22, price: 350}, {size: 28, price: 380}, {size: 33, price: 400, isActive: true}]},
+        {id: 2, preview: './assets/img/menu2.png', categories: ['Морепродукты'], label: 'Венеция', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', quantity: 1, sizes: [{size: 22, price: 300}, {size: 28, price: 410, isActive: true}]},
+        {id: 3, preview: './assets/img/menu3.png', categories: ['Мясная'], label: 'Мясная', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', quantity: 1, sizes: [{size: 22, price: 380}, {size: 28, price: 400}, {size: 33, price: 420, isActive: true}]},
+        {id: 4, preview: './assets/img/menu4.png', categories: ['Вегетарианская'], label: 'Сырная', description: 'Лук, картофель, помидоры, грибы, сыр, оливки, мясо...', quantity: 1, sizes: [{size: 33, price: 500, isActive: true}]},
     ];
-
+    
     const parsedCategories = new Set(menu.map((item) => item.categories).flat());
 
     const filterParent = document.querySelector('.menu-filter');
@@ -73,17 +78,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 <div class="menu-list__item-sizes">
                 ${
                     item.sizes.map((el, index) => {
-                        return `<div class="menu-list__item-sizes__item${index === item.sizes.length - 1 ? ' active' : ''}" data-value="${el.size}">${el.size}</div>`
+                        return `<div class="menu-list__item-sizes__item${el.isActive ? ' active' : ''}" data-value="${el.size}">${el.size}</div>`
                     }).join('')
                 }
                 </div>
                 <div class="menu-list__item-actions-wrapper" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
-                    <div class="menu-list__item__price" itemprop="price">${item.sizes[item.sizes.length - 1].price} ₽</div>
+                    <div class="menu-list__item__price" itemprop="price">${item.sizes.find((item) => item.isActive).price} ₽</div>
                     <meta itemprop="priceCurrency" content="RUB">
                     <meta itemprop="availability" content="http://schema.org/InStock" />
                     <div class="menu-list__item-actions">
                         <div class="menu-list__item-actions__item decrement">-</div>
-                        <div class="menu-list__item-actions__item__value">1</div>
+                        <div class="menu-list__item-actions__item__value">${item.quantity}</div>
                         <div class="menu-list__item-actions__item increment">+</div>
                     </div>
                 </div>
@@ -95,8 +100,8 @@ window.addEventListener('DOMContentLoaded', () => {
         node.insertAdjacentHTML('afterbegin', content.join(''))
     };
 
-    generateMenuList(firstPart, menuListFirst);
-    generateMenuList(secondPart, menuListSecond);
+    generateMenuList(firstPart, menuListFirst, filterValue);
+    generateMenuList(secondPart, menuListSecond, filterValue);
 
     const pickSize = (target) => {
         const parent = target.closest('.menu-list__item');
@@ -105,48 +110,58 @@ window.addEventListener('DOMContentLoaded', () => {
 
         target.classList.add('active');
 
+        const menuItemId = +parent.dataset.id;
+
         const sizeValue = +target.innerHTML;
         
         const priceNode = parent.querySelector('.menu-list__item__price');
 
-        const menuItem = menu.filter((item) => item.id === +parent.dataset.id);
-        const newPrice = menuItem[0].sizes.filter((item) => item.size === sizeValue)[0].price;
-
-        const itemQuantity = +parent.querySelector('.menu-list__item-actions__item__value').innerHTML;
-
-        priceNode.innerHTML = newPrice * itemQuantity + ' ₽';
-    };  
-
-    const changeQuantity = (target, value) => {
-        const parent = target.closest('.menu-list__item');
-        const quantityNode = parent.querySelector('.menu-list__item-actions__item__value');
-        const priceNode = parent.querySelector('.menu-list__item__price');
-
-        let quantity = +quantityNode.innerHTML;
-
-        if(value === -1 && quantity === 1){
-            return
+        const menuItem = menu.find((item) => item.id === menuItemId);
+        
+        menuItem.sizes.find((item) => item.isActive === true).isActive = false;
+        menuItem.sizes.find((item) => item.size === sizeValue).isActive = true;
+    
+        if(firstPart.find((item) => item.id === menuItemId)){
+            generateMenuList(firstPart, menuListFirst, filterValue);
+            return console.log('first')
         }
 
-        quantity = quantity + value;
+        if(secondPart.find((item) => item.id === menuItemId)){
+            generateMenuList(secondPart, menuListSecond, filterValue); 
+            return console.log('sec')
+        }
+    };  
 
-        quantityNode.innerHTML = quantity;
+    // const changeQuantity = (target, value) => {
+    //     const parent = target.closest('.menu-list__item');
+    //     const quantityNode = parent.querySelector('.menu-list__item-actions__item__value');
+    //     const priceNode = parent.querySelector('.menu-list__item__price');
 
-        const sizeValue = +parent.querySelector('.menu-list__item-sizes__item.active').innerHTML;
+    //     let quantity = +quantityNode.innerHTML;
 
-        const menuItem = menu.filter((item) => item.id === +parent.dataset.id);
+    //     if(value === -1 && quantity === 1){
+    //         return
+    //     }
 
-        const currentPrice = menuItem[0].sizes.filter((item) => item.size === sizeValue)[0].price;
+    //     quantity = quantity + value;
 
-        priceNode.innerHTML = currentPrice * quantity + ' ₽';
-    };
+    //     quantityNode.innerHTML = quantity;
+
+    //     const sizeValue = +parent.querySelector('.menu-list__item-sizes__item.active').innerHTML;
+
+    //     const menuItem = menu.filter((item) => item.id === +parent.dataset.id);
+
+    //     const currentPrice = menuItem[0].sizes.filter((item) => item.size === sizeValue)[0].price;
+
+    //     priceNode.innerHTML = currentPrice * quantity + ' ₽';
+    // };
 
     window.addEventListener('click', ({target}) => {
         if(target.className === 'menu-filter__item'){
             filterItemClickHandler(target);
 
-            generateMenuList(firstPart, menuListFirst, target.dataset.filterValue);
-            generateMenuList(secondPart, menuListSecond, target.dataset.filterValue);
+            generateMenuList(firstPart, menuListFirst, filterValue);
+            generateMenuList(secondPart, menuListSecond, filterValue);
         };
         
         if (target.className === 'menu-list__item-sizes__item'){
