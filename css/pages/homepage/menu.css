@@ -61,6 +61,7 @@
     font-size: 14px;
     transition: 0.4s;
     cursor: pointer;
+    background: transparent;
 }
 
 .menu-list__item-sizes__item.active{
@@ -87,6 +88,7 @@
     font-size: 14px;
     transition: 0.4s;
     cursor: pointer;
+    background: transparent;
 }
 
 .menu-list__item-actions__item:hover{
@@ -180,6 +182,7 @@
     font-size: 20px;
     transition: 0.4s;
     cursor: pointer;
+    border: none;
 }
 
 .menu-filter__item:not(:first-child){

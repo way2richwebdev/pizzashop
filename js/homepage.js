@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const generateFilter = () => {
         const content = [...parsedCategories].map((item) => {
-            return `<div class="menu-filter__item" data-filter-value="${item}">${item}</div>`
+            return `<button class="menu-filter__item" data-filter-value="${item}">${item}</button>`
         })
 
         filterParent.insertAdjacentHTML('beforeend', content.join(''))
@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <div class="menu-list__item-sizes">
                 ${
                     item.sizes.map((el, index) => {
-                        return `<div class="menu-list__item-sizes__item${el.isActive ? ' active' : ''}" data-value="${el.size}">${el.size}</div>`
+                        return `<button class="menu-list__item-sizes__item${el.isActive ? ' active' : ''}" data-value="${el.size}">${el.size}</button>`
                     }).join('')
                 }
                 </div>
@@ -87,9 +87,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     <meta itemprop="priceCurrency" content="RUB">
                     <meta itemprop="availability" content="http://schema.org/InStock" />
                     <div class="menu-list__item-actions">
-                        <div class="menu-list__item-actions__item decrement">-</div>
+                        <button class="menu-list__item-actions__item decrement">-</button>
                         <div class="menu-list__item-actions__item__value">${item.quantity}</div>
-                        <div class="menu-list__item-actions__item increment">+</div>
+                        <button class="menu-list__item-actions__item increment">+</button>
                     </div>
                 </div>
                 <button class="menu-list__item__button button">В корзину</button>
